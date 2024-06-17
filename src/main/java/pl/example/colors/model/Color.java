@@ -1,35 +1,27 @@
 package pl.example.colors.model;
 
-import javax.persistence.*;
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "color")
+@Table(name = "color", schema = "colors")
 public class Color {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-
+    @Column(name = "colorName", nullable = false)
     private String colorName;
 
-    @OneToMany(mappedBy = "color", cascade = CascadeType.ALL)
-    private List<ComponentsPrice> colorPrices;
-
     public Color() {
-    }
-
-    public Color(String colorName) {
-        this.colorName = colorName;
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -41,12 +33,8 @@ public class Color {
         this.colorName = colorName;
     }
 
-    public List<ComponentsPrice> getColorPrices() {
-        return colorPrices;
+    public Color(Integer id, String colorName) {
+        this.id = id;
+        this.colorName = colorName;
     }
-
-    public void setColorPrices(List<ComponentsPrice> colorPrices) {
-        this.colorPrices = colorPrices;
-    }
-
 }

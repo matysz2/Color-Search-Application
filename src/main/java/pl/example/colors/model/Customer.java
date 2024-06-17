@@ -1,61 +1,49 @@
 package pl.example.colors.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", schema = "colors")
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotEmpty(message = "First name is required")
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @NotEmpty(message = "Last name is required")
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NotEmpty(message = "Address is required")
-    @Column(nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
-    @NotEmpty(message = "Phone number is required")
-    @Column(nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @NotEmpty(message = "Email is required")
-    @Email(message = "Email should be valid")
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @NotEmpty(message = "Password is required")
-    @Size(min = 6, message = "Password should have at least 6 characters")
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-
     public Customer() {
+
     }
-
-    public Customer(String firstName, String lastName, String address, String phoneNumber, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.password = password;
-    }
-
-
 
     public Long getId() {
         return id;
+    }
+
+    public Customer(Long id, String password, String email, String phoneNumber, String address, String lastName, String firstName) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
 
     public void setId(Long id) {
@@ -109,4 +97,5 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

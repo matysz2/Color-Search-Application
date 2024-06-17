@@ -1,29 +1,27 @@
 package pl.example.colors.model;
 
-import pl.example.colors.model.Color;
-import pl.example.colors.model.Customer;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
-@Table(name = "color_history")
+@Table(name = "color_history", schema = "colors")
 public class ColorHistory {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "color_id")
     private Color color;
 
     @Column(name = "search_timestamp")
-    private Timestamp searchTimestamp;
+    private Instant searchTimestamp;
 
     @Column(name = "price")
     private Double price;
@@ -31,18 +29,8 @@ public class ColorHistory {
     @Column(name = "quantity")
     private Double quantity;
 
-    // Constructors, getters, setters, and other methods as needed
-
-    // Constructors
     public ColorHistory() {
-    }
 
-    public ColorHistory(Customer customer, Color color, Timestamp searchTimestamp, Double price, Double quantity) {
-        this.customer = customer;
-        this.color = color;
-        this.searchTimestamp = searchTimestamp;
-        this.price = price;
-        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -53,28 +41,12 @@ public class ColorHistory {
         this.id = id;
     }
 
-    public Double getQuantity() {
-        return quantity;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Timestamp getSearchTimestamp() {
-        return searchTimestamp;
-    }
-
-    public void setSearchTimestamp(Timestamp searchTimestamp) {
-        this.searchTimestamp = searchTimestamp;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Color getColor() {
@@ -85,11 +57,36 @@ public class ColorHistory {
         this.color = color;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Instant getSearchTimestamp() {
+        return searchTimestamp;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setSearchTimestamp(Instant searchTimestamp) {
+        this.searchTimestamp = searchTimestamp;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
+
+    public ColorHistory(Integer id, Instant searchTimestamp, Double price, Double quantity, Color color, Customer customer) {
+        this.id = id;
+        this.searchTimestamp = searchTimestamp;
+        this.price = price;
+        this.quantity = quantity;
+        this.color = color;
         this.customer = customer;
     }
 }
