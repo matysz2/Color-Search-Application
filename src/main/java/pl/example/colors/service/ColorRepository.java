@@ -8,10 +8,10 @@ import pl.example.colors.model.Color;
 
 import java.util.List;
 
-public interface ColorRepository extends JpaRepository<Color, Integer> {
 
+public interface ColorRepository extends JpaRepository<Color, Integer> {
     Color findByColorName(String colorName);
 
-    @Query("SELECT c FROM Color c WHERE c.colorName LIKE :start%")
-    List<Color> getColorsByColorNameStartsWith(@Param("start") String start);
+    @Query("SELECT c FROM Color c WHERE c.colorName LIKE %:fragment%")
+    List<Color> findColorsByColorNameContains(@Param("fragment") String fragment);
 }
