@@ -10,7 +10,7 @@ public class Color {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "colorName", nullable = false)
+    @Column(name = "colorName", nullable = false, unique = true)
     private String colorName;
 
     public Color() {

@@ -18,11 +18,10 @@ public class Price {
     @Column(name = "price", precision = 8, scale = 6)
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "colorName")
-    private Color colorName;
+@Column(name="colorName")
+    private String colorName;
 
-    public Price(Long id, BigDecimal componentQuantity, Color colorName, BigDecimal price, String colorComponent) {
+    public Price(Long id, String componentQuantity, String colorName, BigDecimal price, String colorComponent) {
         this.id = id;
         this.componentQuantity = componentQuantity;
         this.colorName = colorName;
@@ -31,10 +30,13 @@ public class Price {
     }
 
     @Column(name = "componentQuantity", precision = 8, scale = 6)
-    private BigDecimal componentQuantity;
+    private String componentQuantity;
 
-    public Price() {
-
+    public Price(String colorComponent, String componentQuantity, BigDecimal price, String colorName) {
+        this.colorComponent = colorComponent;
+        this.componentQuantity = componentQuantity;
+        this.price = price;
+       this.colorName = colorName;
     }
 
     public Long getId() {
@@ -45,12 +47,12 @@ public class Price {
         this.id = id;
     }
 
-    public String getColorComponent() {
-        return colorComponent;
+    public String getComponentQuantity() {
+        return componentQuantity;
     }
 
-    public void setColorComponent(String colorComponent) {
-        this.colorComponent = colorComponent;
+    public void setComponentQuantity(String componentQuantity) {
+        this.componentQuantity = componentQuantity;
     }
 
     public BigDecimal getPrice() {
@@ -61,20 +63,19 @@ public class Price {
         this.price = price;
     }
 
-    public Color getColorName() {
+    public String getColorComponent() {
+        return colorComponent;
+    }
+
+    public void setColorComponent(String colorComponent) {
+        this.colorComponent = colorComponent;
+    }
+
+    public String getColorName() {
         return colorName;
     }
 
-    public void setColorName(Color colorName) {
+    public void setColorName(String colorName) {
         this.colorName = colorName;
     }
-
-    public BigDecimal getComponentQuantity() {
-        return componentQuantity;
-    }
-
-    public void setComponentQuantity(BigDecimal componentQuantity) {
-        this.componentQuantity = componentQuantity;
-    }
-
 }

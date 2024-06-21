@@ -93,6 +93,7 @@ nav ul li a:hover {
 /* Styl dla formularza */
 #colorForm {
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* Styl dla etykiety */
@@ -134,14 +135,137 @@ button[type="submit"]:hover {
     font-weight: bold;
     color: #4CAF50;
 }
-
 /* Styl dla listy kolorów */
 #colorList {
     list-style-type: none;
     padding: 0;
 }
-
 #colorList li {
     margin-bottom: 5px;
     font-size: 16px;
+}
+table {
+
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+}
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+.component {
+    color: #333;
+}
+.quantity {
+    color: #666;
+}
+
+.price{
+    color:red;
+    font-size:25px
+}
+
+input[type="number"] {
+    width: 25%;
+    padding: 10px;
+    margin: 20px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="number"]:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+input[type="number"]::placeholder {
+    color: #999;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+label {
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+
+
+input[type="number"] {
+    width: 25%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="number"]:focus {
+    border-color: #66afe9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+input[type="number"]::placeholder {
+    color: #999;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+#buttons {
+    margin-top: 10px;
+}
+
+#calculate, .save {
+    padding: 10px 20px;
+    width: 25%;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.calculate {
+    background-color: #4CAF50; /* Zielony */
+}
+
+.calculate:hover {
+    background-color: #45a049;
+}
+
+.save {
+    background-color: #f44336; /* Czerwony */
+}
+
+.save:hover {
+    background-color: #e53935;
 }

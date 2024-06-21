@@ -12,25 +12,16 @@ import pl.example.colors.service.ColorRepository;
 import java.util.List;
 
 @Getter
-@Controller
+@RestController
 public class ColorController {
 
     @Autowired
     private ColorRepository colorRepository;
 
     @GetMapping("/getColorName")
-    public ResponseEntity<Color> getColorName(@RequestParam String colorName) {
-        Color color = colorRepository.findByColorName(colorName);
-        if (color != null) {
-            return ResponseEntity.ok(color);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<Color> searchColorsByFragment(@RequestParam String fragment) {
+        return colorRepository.findColorsByColorNameContains(fragment);
     }
-    @PostMapping("/submitColor")
-    @ResponseBody
-    public String submitColor(@RequestParam String colorName) {
-        return "Color submitted successfully";
-    }
+
 
 }
