@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <html>
@@ -9,6 +10,8 @@
     <link rel="stylesheet" href="<spring:url value='/styles.css' />">
     <script src="<spring:url value='/js/colorScript.js' />"></script>
     <script src="<spring:url value='/js/colorPrice.js' />"></script>
+    <script src="<spring:url value='/js/saveScript.js' />"></script>
+    <script src="<spring:url value='/js/comment.js' />"></script>
 </head>
 <body>
 <nav>
@@ -17,21 +20,30 @@
         <li><a href="${pageContext.request.contextPath}/history">Historia</a></li>
         <li><a href="${pageContext.request.contextPath}/comments">Komentarze</a></li>
         <li><a href="${pageContext.request.contextPath}/logout">Wyloguj się</a></li>
+        <c:if test="${sessionScope.loggedInUser != null}">
+
+            <p class="user" style="display: none">${loggedInUser.id}</p>
+                <p class="user1"> Zalogowany użytkownik: ${loggedInUser.firstName} ${loggedInUser.lastName}</p>
+        </c:if>
     </ul>
+
 </nav>
+
 <form action="<spring:url value='/searchColor' />" id="colorForm" method="post">
     <label for="colorInput">Wpisz nazwę koloru:</label>
     <input type="text" id="colorInput" name="colorName">
     <button type="submit">Wyszukaj</button>
 </form>
-
+<c:if test="${not empty error}">
+    <div style="color: red;">${error}</div>
+</c:if>
 <div id="hiddenDiv" style="display:none;">
     <ul id="colorDisplay"></ul>
 </div>
 
-<div id="result" style="display:none;">
+<div id="result">
 
-    <h2>Wyniki wyszukawania dla koloru: ${name} 1 kg:</h2>
+    <h2 class="info">Wyniki wyszukawania dla koloru: <p class="color">${name}</p> <span class="ilos">1 </span>kg:</h2>
 
     <table border="1">
         <thead>
@@ -41,6 +53,7 @@
 
         </tr>
         </thead>
+
         <tbody>
         <c:forEach items="${componentQuantities}" varStatus="loop">
             <tr>
@@ -49,15 +62,19 @@
                 </c:forEach>
         </tbody>
     </table>
+
     <table>
         <c:forEach items="${prices}" var="price">
             <tr>
                 <td>
-                    Cena netto produkcji koloru 1 kg bez opakowania(PLN):
+                    Cena netto produkcji koloru <span class="ilos">1 </span> kg bez opakowania(PLN):
                 </td>
                 <td class="price">
                         ${price.price}
                 </td>
+                <c:if test="${ error}">
+                    <div style="color: red;">${error}</div>
+                </c:if>
             </tr>
         </c:forEach>
     </table>
@@ -67,7 +84,14 @@
 
     <button type="button" id="calculate">Oblicz</button>
     <button type="button" class="save">Zapisz</button>
-
+<h4 class="info2" style="color:red"></h4>
 </div>
+<div class="comments">
+    <label for="comments">Komentarze:</label><br>
+    <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+    <button type="button" id="comment">Dodaj komentarz</button>
+</div>
+
+<h4 class="info3" style="color:red"></h4>
 </body>
 </html>

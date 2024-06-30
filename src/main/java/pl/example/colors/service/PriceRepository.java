@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface PriceRepository extends JpaRepository<Price, Long> {
 
+    boolean existsByColorName(String colorName);
 
     @Query("SELECT p.colorComponent, p.componentQuantity, p.price, p.colorName FROM Price p WHERE p.colorName LIKE %:colorName%")
     List<Object[]> findComponentsAndQuantityAndPriceByColorName(@Param("colorName") String colorName);

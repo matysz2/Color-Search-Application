@@ -17,6 +17,7 @@ public interface ColorRepository extends JpaRepository<Color, Integer> {
     @Query("SELECT c FROM Color c WHERE c.colorName LIKE %:fragment%")
     List<Color> findColorsByColorNameContains(@Param("fragment") String fragment);
 
-
+    @Query("SELECT c.colorName FROM Color c WHERE c.id = :id")
+    String findColorNameById(@Param("id") Integer id);
 
 }

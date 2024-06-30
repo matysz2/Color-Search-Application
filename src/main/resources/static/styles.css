@@ -1,4 +1,5 @@
 /* Resetowanie domyślnych stylów */
+
 * {
     margin: 0;
     padding: 0;
@@ -268,4 +269,53 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .save:hover {
     background-color: #e53935;
+}
+.user1 {
+    font-size: 16px;
+    color: red;
+    margin-top: 10px;
+}
+.user {
+    font-size: 16px;
+    color: red;
+    margin-top: 10px;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+.comments label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comments textarea {
+    width: 80%;
+    padding: 10px;
+    margin-left: 5%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing */
+}
+#comment {
+    width: 20%;
+    background-color: #4CAF50; /* Zielone tło */
+    border: none; /* Bez obramowania */
+    color: white; /* Biały tekst */
+    padding: 15px 32px; /* Wewnętrzne odstępy */
+    text-align: center; /* Wyrównanie tekstu do środka */
+    text-decoration: none; /* Bez podkreślenia tekstu */
+    display: inline-block; /* Wyświetlanie inline-block */
+    font-size: 16px; /* Rozmiar czcionki */
+    margin: 4px 2px; /* Marginesy */
+    cursor: pointer; /* Zmiana kursora na wskaźnik */
+    border-radius: 12px; /* Zaokrąglone rogi */
+    transition: background-color 0.3s ease; /* Animacja zmiany koloru tła */
+}
+
+#comment:hover {
+    background-color: #45a049; /* Ciemniejsze zielone tło po najechaniu */
 }

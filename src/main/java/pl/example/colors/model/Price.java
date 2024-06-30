@@ -1,8 +1,9 @@
 package pl.example.colors.model;
-
 import jakarta.persistence.*;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
+
 
 @Entity
 @Table(name = "price", schema = "colors")
@@ -18,13 +19,20 @@ public class Price {
     @Column(name = "price", precision = 8, scale = 6)
     private BigDecimal price;
 
-@Column(name="colorName")
+    @NotEmpty(message = "Pole nie może być puste")
+    @Min(value = 8, message = "Proszę wybrać wyświetlany kolor")
+    @Column(name = "colorName")
     private String colorName;
 
-    public Price(Long id, String componentQuantity, String colorName, BigDecimal price, String colorComponent) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "color_id") // nazwa kolumny w tabeli "price", która przechowuje klucz obcy do tabeli "color"
+    private Color color;
+
+    public Price(Long id, String componentQuantity, String colorName, BigDecimal price, String colorComponent, Color color) {
         this.id = id;
         this.componentQuantity = componentQuantity;
         this.colorName = colorName;
+        this.color = color;
         this.price = price;
         this.colorComponent = colorComponent;
     }
@@ -36,8 +44,10 @@ public class Price {
         this.colorComponent = colorComponent;
         this.componentQuantity = componentQuantity;
         this.price = price;
-       this.colorName = colorName;
+        this.id=getId();
+        this.colorName = colorName;
     }
+
 
     public Long getId() {
         return id;
@@ -55,12 +65,20 @@ public class Price {
         this.componentQuantity = componentQuantity;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public Color getColor() {
+        return color;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public @NotEmpty(message = "Pole nie może być puste") @Min(value = 8, message = "Proszę wybrać wyświetlany kolor") String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(@NotEmpty(message = "Pole nie może być puste") @Min(value = 8, message = "Proszę wybrać wyświetlany kolor") String colorName) {
+        this.colorName = colorName;
     }
 
     public String getColorComponent() {
@@ -71,11 +89,12 @@ public class Price {
         this.colorComponent = colorComponent;
     }
 
-    public String getColorName() {
-        return colorName;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
+

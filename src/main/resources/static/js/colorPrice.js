@@ -1,22 +1,28 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Zablokowanie domyślnego działania formularza
-    $('#colorForm').submit(function(event) {
-        event.preventDefault();
-        let result = $('#result');
-        result.show();
 
-    });
-    $('#colorInput').on('input', function() {
+    $('#colorInput').on('input', function () {
         $('#result').hide();
+        $('.comments').hide();
     });
     // Obsługa przycisku "Oblicz"
-    $('#calculate').click(function() {
+    $('#calculate').click(function () {
         const inputValue = $('#value').val();
-        if (isNaN(inputValue) || inputValue <= 0) {
-            alert('Proszę podać liczbę większą od 0');
+        const ilosElements = document.querySelectorAll('.ilos');
+
+        if (isNaN(inputValue) || inputValue <= 0 || inputValue === null || inputValue === undefined) {
+            $(".info2").text("Proszę podać prawidłową ilość").fadeIn();
+            setTimeout(function() {
+                $(".info2").fadeOut();
+            }, 3000);
             return;
+
         }
-        $('tbody tr').each(function() {
+        ilosElements.forEach(element => {
+            // Zmiana zawartości każdego elementu <span> na '2 kg'
+            element.innerText = inputValue;
+        });
+        $('tbody tr').each(function () {
             const $row = $(this);
             const originalQuantity = parseFloat($row.find('.quantity').data('originalQuantity'));
             const originalPrice = parseFloat($row.find('.price').data('originalPrice'));
@@ -30,9 +36,9 @@ $(document).ready(function() {
     });
 
 
-    $('#reset').click(function() {
+    $('#reset').click(function () {
         // Przywrócenie pierwotnych wartości
-        $('tbody tr').each(function() {
+        $('tbody tr').each(function () {
             const $row = $(this);
             const originalQuantity = $row.find('.quantity').data('originalQuantity');
             const originalPrice = $row.find('.price').data('originalPrice');
@@ -43,7 +49,7 @@ $(document).ready(function() {
     });
 
     // Zapisanie pierwotnych wartości jako atrybutów danych
-    $('tbody tr').each(function() {
+    $('tbody tr').each(function () {
         const $row = $(this);
         const originalQuantity = parseFloat($row.find('.quantity').text());
         const originalPrice = parseFloat($row.find('.price').text());
